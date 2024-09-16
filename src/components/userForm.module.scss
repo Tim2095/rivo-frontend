@@ -13,9 +13,26 @@
   .form-fields {
     max-width: 50%;
 
+    label {
+      padding: 1rem 0 0.5rem 0;
+    }
+
     .create-btn {
       width: 100%;
       margin-top: 2rem;
+      background-color: #dee2e6;
+      border: 1px solid black;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 1rem;
+      -webkit-border-radius: 1rem;
+      -moz-border-radius: 1rem;
+      -ms-border-radius: 1rem;
+      -o-border-radius: 1rem;
+      
+      &:hover {
+        background-color: #40c057;
+      }
     }
 
     div {
