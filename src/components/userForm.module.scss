@@ -13,6 +13,27 @@
   .form-fields {
     max-width: 50%;
 
+    .password-cnt {
+      position: relative;
+
+      input {
+        padding-right: 3rem;
+        width: 100%;
+      }
+    }
+
+    .show-hide {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      cursor: pointer;
+      transform: translateY(-50%);
+      -webkit-transform: translateY(-50%);
+      -moz-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      -o-transform: translateY(-50%);
+    }
+
     label {
       padding: 1rem 0 0.5rem 0;
     }
@@ -29,7 +50,7 @@
       -moz-border-radius: 1rem;
       -ms-border-radius: 1rem;
       -o-border-radius: 1rem;
-      
+
       &:hover {
         background-color: #40c057;
       }
