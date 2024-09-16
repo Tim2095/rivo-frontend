@@ -1,0 +1,50 @@
+.home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  gap: 2rem;
+  height: 80vh;
+  background-color: #dce5e2;
+  margin-top: 3rem;
+  border-radius: 3.2rem;
+  -webkit-border-radius: 3.2rem;
+  -moz-border-radius: 3.2rem;
+  -ms-border-radius: 3.2rem;
+  -o-border-radius: 3.2rem;
+}
+.home h2 {
+  font-size: 4rem;
+}
+.home h3 {
+  font-size: 3rem;
+}
+.home p {
+  font-size: 2rem;
+}
+.home .home-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  font-size: 2rem;
+  width: 25%;
+}
+.home .home-link a {
+  text-decoration: none;
+  color: #000000;
+  border: 1px solid black;
+  padding: 1rem 3rem 1rem 3rem;
+  border-radius: 2rem;
+  -webkit-border-radius: 2rem;
+  -moz-border-radius: 2rem;
+  -ms-border-radius: 2rem;
+  -o-border-radius: 2rem;
+  flex-grow: 1;
+  flex-basis: 0; /* Ensure links start with an equal base size */
+  text-align: center;
+  display: block;
+}
+.home .home-link a:hover {
+  background-color: #fcc419;
+}/*# sourceMappingURL=home.module.css.map */

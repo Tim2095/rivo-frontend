@@ -5,7 +5,7 @@ const Header = () => {
     <header>
       <nav className={classes.nav}>
         <div>
-          <h1 className={classes["main-logo"]}>CALIFORNIA</h1>
+          <h1 className={classes["main-logo"]}>RIVO</h1>
         </div>
         <div className={classes["nav-link"]}>
           <ul className={classes.link}>
