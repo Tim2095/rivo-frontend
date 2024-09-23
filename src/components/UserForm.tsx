@@ -29,8 +29,14 @@ const UserForm = () => {
         const errorMessage =
           (err as Error).message || "An unknown error occurred";
         setError(errorMessage);
+        setTimeout(() => {
+          setError('')
+        }, 5000)
       } else {
         setError("An unknown Error occured");
+        setTimeout(() => {
+          setError('')
+        }, 5000)
       }
     }
   };
@@ -40,7 +46,7 @@ const UserForm = () => {
   return (
     <>
       <form className={classes.form} onSubmit={onCreateUser}>
-        {error && <h3>{error}</h3>}
+        {error && <h3 className={classes.error}>{error}</h3>}
         <div className={classes["form-fields"]}>
           <div>
             <label htmlFor="">First Name</label>
