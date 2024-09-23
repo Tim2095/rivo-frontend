@@ -26,9 +26,11 @@ const UserForm = () => {
       setError("");
     } catch (err) {
       if (err instanceof Error) {
-        setError(err.message);
+        const errorMessage =
+          (err as Error).message || "An unknown error occurred";
+        setError(errorMessage);
       } else {
-        setError('An unknown Error occured')
+        setError("An unknown Error occured");
       }
     }
   };
@@ -36,44 +38,46 @@ const UserForm = () => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
 
   return (
-    <form className={classes.form} onSubmit={onCreateUser}>
-      <h1>{error}</h1>
-      <div className={classes["form-fields"]}>
-        <div>
-          <label htmlFor="">First Name</label>
-          <input type="text" ref={firstname} />
-        </div>
-        <div>
-          <label htmlFor="">Last Name</label>
-          <input type="text" ref={lastname} />
-        </div>
-        <div>
-          <label htmlFor="">Age</label>
-          <input type="text" ref={age} />
-        </div>
-        <div>
-          <label htmlFor="">Email</label>
-          <input type="email" ref={email} />
-        </div>
-        <div>
-          <label htmlFor="">Password</label>
-          <div className={classes["password-cnt"]}>
-            <input
-              type={!passwordVisible ? "password" : "text"}
-              id="password"
-              ref={password}
-            />
-            <span
-              className={classes["show-hide"]}
-              onClick={() => setPasswordVisible(!passwordVisible)}
-            >
-              {passwordVisible ? "🙈" : "👁️"}
-            </span>
+    <>
+      <form className={classes.form} onSubmit={onCreateUser}>
+        {error && <h3>{error}</h3>}
+        <div className={classes["form-fields"]}>
+          <div>
+            <label htmlFor="">First Name</label>
+            <input type="text" ref={firstname} />
           </div>
+          <div>
+            <label htmlFor="">Last Name</label>
+            <input type="text" ref={lastname} />
+          </div>
+          <div>
+            <label htmlFor="">Age</label>
+            <input type="text" ref={age} />
+          </div>
+          <div>
+            <label htmlFor="">Email</label>
+            <input type="email" ref={email} />
+          </div>
+          <div>
+            <label htmlFor="">Password</label>
+            <div className={classes["password-cnt"]}>
+              <input
+                type={!passwordVisible ? "password" : "text"}
+                id="password"
+                ref={password}
+              />
+              <span
+                className={classes["show-hide"]}
+                onClick={() => setPasswordVisible(!passwordVisible)}
+              >
+                {passwordVisible ? "🙈" : "👁️"}
+              </span>
+            </div>
+          </div>
+          <button className={classes["create-btn"]}>Create Account</button>
         </div>
-        <button className={classes["create-btn"]}>Create Account</button>
-      </div>
-    </form>
+      </form>
+    </>
   );
 };
 

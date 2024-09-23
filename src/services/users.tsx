@@ -22,8 +22,12 @@ const createUser = async (user: User) => {
     console.log("User created successfully", response.data);
   } catch (err) {
     if (axios.isAxiosError(err)) {
-      console.log("Axios error response", err.response?.data || err.message);
-      throw err.response?.data || new Error("Failed to create user");
+      console.log("Axios error response", err.response);
+      if (err.response?.data) {
+        throw new Error(err.response.data.message || "Failed to create user");
+      } else {
+        throw new Error("Failed to create user");
+      }
     } else {
       throw new Error("An unknown error occurred");
     }
