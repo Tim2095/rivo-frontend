@@ -1,4 +1,4 @@
-const baseUrl = "/api/user/create";
+const baseUrl = "/api/user";
 import axios from "axios";
 
 type Task = {
@@ -9,7 +9,7 @@ type Task = {
 
 type User = {
   firstname: string;
-  secondname: string;
+  lastname: string;
   age: number;
   email: string;
   password: string;
@@ -19,13 +19,17 @@ type User = {
 const createUser = async (user: User) => {
   try {
     const response = await axios.post(baseUrl, user);
-    console.log('User created successfully', response.data)
+    console.log("User created successfully", response.data);
   } catch (err) {
-    console.log('Error creating user', err)
+    if (axios.isAxiosError(err)) {
+      console.log("Axios error response", err.response?.data || err.message);
+      throw err.response?.data || new Error("Failed to create user");
+    } else {
+      throw new Error("An unknown error occurred");
+    }
   }
 };
 
-
 export default {
-  createUser
-}
+  createUser,
+};

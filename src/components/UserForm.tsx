@@ -1,6 +1,6 @@
 import classes from "./userForm.module.scss";
 import { useRef, useState } from "react";
-
+import userServices from "../services/users";
 const UserForm = () => {
   const firstname = useRef<HTMLInputElement>(null);
   const lastname = useRef<HTMLInputElement>(null);
@@ -8,10 +8,36 @@ const UserForm = () => {
   const email = useRef<HTMLInputElement>(null);
   const password = useRef<HTMLInputElement>(null);
 
+  const [error, setError] = useState<string>("");
+
+  const onCreateUser = async (event: React.FormEvent) => {
+    event.preventDefault();
+    try {
+      const newUser = {
+        firstname: firstname.current!.value,
+        lastname: lastname.current!.value,
+        age: +age.current!.value,
+        email: email.current!.value,
+        password: password.current!.value,
+        tasks: [],
+      };
+      const response = await userServices.createUser(newUser);
+      console.log("User created successfully", response);
+      setError("");
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('An unknown Error occured')
+      }
+    }
+  };
+
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
 
   return (
-    <form className={classes.form}>
+    <form className={classes.form} onSubmit={onCreateUser}>
+      <h1>{error}</h1>
       <div className={classes["form-fields"]}>
         <div>
           <label htmlFor="">First Name</label>
@@ -37,7 +63,10 @@ const UserForm = () => {
               id="password"
               ref={password}
             />
-            <span className={classes["show-hide"]} onClick={() => setPasswordVisible(!passwordVisible)}>
+            <span
+              className={classes["show-hide"]}
+              onClick={() => setPasswordVisible(!passwordVisible)}
+            >
               {passwordVisible ? "🙈" : "👁️"}
             </span>
           </div>
