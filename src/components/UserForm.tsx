@@ -1,7 +1,10 @@
 import classes from "./userForm.module.scss";
 import { useRef, useState } from "react";
 import userServices from "../services/users";
+import { type NavigateFunction, useNavigate } from "react-router-dom";
 const UserForm = () => {
+  const navigate: NavigateFunction = useNavigate()
+
   const firstname = useRef<HTMLInputElement>(null);
   const lastname = useRef<HTMLInputElement>(null);
   const age = useRef<HTMLInputElement>(null);
@@ -27,6 +30,7 @@ const UserForm = () => {
       setSuccessUser('User created successfully')
       setTimeout(() => {
         setSuccessUser('')
+        navigate('/login')
       }, 3000)
       setError("");
     } catch (err) {
