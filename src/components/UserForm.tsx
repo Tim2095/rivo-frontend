@@ -9,6 +9,7 @@ const UserForm = () => {
   const password = useRef<HTMLInputElement>(null);
 
   const [error, setError] = useState<string>("");
+  const [successUser, setSuccessUser] = useState<string>('')
 
   const onCreateUser = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -21,8 +22,12 @@ const UserForm = () => {
         password: password.current!.value,
         tasks: [],
       };
-      const response = await userServices.createUser(newUser);
-      console.log("User created successfully", response);
+      await userServices.createUser(newUser);
+      console.log("User created successfully", );
+      setSuccessUser('User created successfully')
+      setTimeout(() => {
+        setSuccessUser('')
+      }, 3000)
       setError("");
     } catch (err) {
       if (err instanceof Error) {
@@ -46,7 +51,8 @@ const UserForm = () => {
   return (
     <>
       <form className={classes.form} onSubmit={onCreateUser}>
-        {error && <h3 className={classes.error}>{error}</h3>}
+        {error && <p className={classes.error}>{error}</p>}
+        {successUser && <p className={classes['user-created']}>{successUser}</p>}
         <div className={classes["form-fields"]}>
           <div>
             <label htmlFor="">First Name</label>
