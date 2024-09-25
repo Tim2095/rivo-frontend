@@ -1,0 +1,43 @@
+.form {
+  margin: 0 auto;
+  height: 80vh;
+  background-color: #dce5e2;
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  font-size: 1.6rem;
+  border-radius: 3.2rem;
+  -webkit-border-radius: 3.2rem;
+  -moz-border-radius: 3.2rem;
+  -ms-border-radius: 3.2rem;
+  -o-border-radius: 3.2rem;
+
+  .form-fields {
+    max-width: 50%;
+    font-size: 1.6rem;
+
+    .login-inp {
+      display: flex;
+      flex-flow: column;
+      margin-bottom: 2rem;
+
+      label {
+        margin-bottom: 1rem;
+      }
+    }
+
+    .login-btn {
+      text-align: center;
+      margin-top: 2rem;
+
+      button {
+        padding: 0.5rem 2rem 0.5rem 2rem;
+        cursor: pointer;
+        background-color: #c0eb75;
+        border: none;
+      }
+    }
+  }
+}
