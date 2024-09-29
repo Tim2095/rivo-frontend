@@ -34,6 +34,7 @@ const createUser = async (user: User) => {
   }
 };
 
+
 export default {
   createUser,
 };
