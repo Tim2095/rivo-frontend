@@ -1,6 +1,7 @@
 import { FormEvent, useState } from "react";
 import classes from "./login.module.scss";
 import loginServices from "../services/login";
+import { UseDispatch } from "react-redux";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");
@@ -11,11 +12,12 @@ const Login = () => {
     event.preventDefault();
 
     try {
-      const response = await loginServices.loginUser({
+      const loggedUser = await loginServices.loginUser({
         email,
         password,
       });
-      console.log(response)
+      
+      localStorage.setItem('token', JSON.stringify(loggedUser.token))
     } catch (err) {
       if (err instanceof Error) {
         const errorMessage =

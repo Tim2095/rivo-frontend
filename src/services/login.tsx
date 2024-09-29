@@ -14,6 +14,7 @@ const loginUser = async (credentials: UserCredential) => {
     if(axios.isAxiosError(err)) {
       console.log('Axios error response', err.response)
       if(err.response?.data) {
+
         throw new Error(err.response.data.message)
       } else {
         throw new Error('An unknown error occured')
