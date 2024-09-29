@@ -11,10 +11,11 @@ const Login = () => {
     event.preventDefault();
 
     try {
-      await loginServices.loginUser({
+      const response = await loginServices.loginUser({
         email,
         password,
       });
+      console.log(response)
     } catch (err) {
       if (err instanceof Error) {
         const errorMessage =
