@@ -23,7 +23,7 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const users = useSelector((state: RootState) => state.users);
-  console.log(users)
+
   const onSubmitForm = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -33,13 +33,15 @@ const Login = () => {
         password,
       });
 
-      dispatch(setUser({
-        id: loggedUser.id,
-        email: loggedUser.email,
-        firstname: loggedUser.firstname,
-        lastname: loggedUser.lastname,
-        age: loggedUser.age
-      }));
+      dispatch(
+        setUser({
+          id: loggedUser.id,
+          email: loggedUser.email,
+          firstname: loggedUser.firstname,
+          lastname: loggedUser.lastname,
+          age: loggedUser.age,
+        })
+      );
 
       localStorage.setItem("token", JSON.stringify(loggedUser.token));
     } catch (err) {
