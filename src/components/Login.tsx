@@ -1,12 +1,15 @@
 import { FormEvent, useState } from "react";
 import classes from "./login.module.scss";
 import loginServices from "../services/login";
-import { UseDispatch } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import {setUser} from '../reduers/userReducer'
 const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [loginError, setLoginError] = useState<string>("");
+  const dispatch = useDispatch();
+
+  const users = useSelector(state => state.users)
 
   const onSubmitForm = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -16,8 +19,12 @@ const Login = () => {
         email,
         password,
       });
-      
-      localStorage.setItem('token', JSON.stringify(loggedUser.token))
+
+      dispatch(setUser(loggedUser))
+
+      console.log(users)
+
+      localStorage.setItem("token", JSON.stringify(loggedUser.token));
     } catch (err) {
       if (err instanceof Error) {
         const errorMessage =
