@@ -1,6 +1,10 @@
 import classes from "./header.module.scss";
 import { NavLink } from "react-router-dom";
+import { useSelector, UseSelector } from "react-redux";
 const Header = () => {
+
+  const user = useSelector(state => state.users)
+
   return (
     <header>
       <nav className={classes.nav}>
