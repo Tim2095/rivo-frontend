@@ -3,6 +3,7 @@ import classes from "./login.module.scss";
 import loginServices from "../../services/login";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../reduers/userReducer";
+import { useNavigate } from "react-router-dom";
 
 type User = {
   id: string;
@@ -21,6 +22,7 @@ const Login = () => {
   const [password, setPassword] = useState<string>("");
   const [loginError, setLoginError] = useState<string>("");
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const user = useSelector((state: RootState) => state.users);
 
@@ -55,6 +57,7 @@ const Login = () => {
       );
 
       localStorage.setItem("token", JSON.stringify(loggedUser.token));
+      navigate('/tasks')
     } catch (err) {
       if (err instanceof Error) {
         const errorMessage =
