@@ -1,9 +1,9 @@
 import classes from "./userForm.module.scss";
 import { useRef, useState } from "react";
-import userServices from "../services/users";
+import userServices from "../../services/users";
 import { type NavigateFunction, useNavigate } from "react-router-dom";
 const UserForm = () => {
-  const navigate: NavigateFunction = useNavigate()
+  const navigate: NavigateFunction = useNavigate();
 
   const firstname = useRef<HTMLInputElement>(null);
   const lastname = useRef<HTMLInputElement>(null);
@@ -12,7 +12,7 @@ const UserForm = () => {
   const password = useRef<HTMLInputElement>(null);
 
   const [error, setError] = useState<string>("");
-  const [successUser, setSuccessUser] = useState<string>('')
+  const [successUser, setSuccessUser] = useState<string>("");
 
   const onCreateUser = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -26,12 +26,12 @@ const UserForm = () => {
         tasks: [],
       };
       await userServices.createUser(newUser);
-      console.log("User created successfully", );
-      setSuccessUser('User created successfully')
+      console.log("User created successfully");
+      setSuccessUser("User created successfully");
       setTimeout(() => {
-        setSuccessUser('')
-        navigate('/login')
-      }, 3000)
+        setSuccessUser("");
+        navigate("/login");
+      }, 3000);
       setError("");
     } catch (err) {
       if (err instanceof Error) {
@@ -39,13 +39,13 @@ const UserForm = () => {
           (err as Error).message || "An unknown error occurred";
         setError(errorMessage);
         setTimeout(() => {
-          setError('')
-        }, 5000)
+          setError("");
+        }, 5000);
       } else {
         setError("An unknown Error occured");
         setTimeout(() => {
-          setError('')
-        }, 5000)
+          setError("");
+        }, 5000);
       }
     }
   };
@@ -56,7 +56,9 @@ const UserForm = () => {
     <>
       <form className={classes.form} onSubmit={onCreateUser}>
         {error && <p className={classes.error}>{error}</p>}
-        {successUser && <p className={classes['user-created']}>{successUser}</p>}
+        {successUser && (
+          <p className={classes["user-created"]}>{successUser}</p>
+        )}
         <div className={classes["form-fields"]}>
           <div>
             <label htmlFor="">First Name</label>

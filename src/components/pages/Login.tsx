@@ -1,8 +1,8 @@
 import { FormEvent, useState } from "react";
 import classes from "./login.module.scss";
-import loginServices from "../services/login";
+import loginServices from "../../services/login";
 import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "../reduers/userReducer";
+import { setUser } from "../../reduers/userReducer";
 
 type User = {
   id: string;
@@ -22,7 +22,7 @@ const Login = () => {
   const [loginError, setLoginError] = useState<string>("");
   const dispatch = useDispatch();
 
-  const users = useSelector((state: RootState) => state.users);
+  const user = useSelector((state: RootState) => state.users);
 
   const onSubmitForm = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -35,6 +35,17 @@ const Login = () => {
 
       dispatch(
         setUser({
+          id: loggedUser.id,
+          email: loggedUser.email,
+          firstname: loggedUser.firstname,
+          lastname: loggedUser.lastname,
+          age: loggedUser.age,
+        })
+      );
+
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
           id: loggedUser.id,
           email: loggedUser.email,
           firstname: loggedUser.firstname,

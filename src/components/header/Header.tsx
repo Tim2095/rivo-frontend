@@ -2,7 +2,6 @@ import classes from "./header.module.scss";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-// Type for user state
 interface User {
   id: string;
   firstname: string;
