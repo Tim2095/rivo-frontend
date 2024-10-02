@@ -1,6 +1,7 @@
 import classes from "./header.module.scss";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { unsetUser } from "../../reduers/userReducer";
 
 interface User {
   id: string;
@@ -61,6 +62,14 @@ const MainHeader = () => {
 };
 
 const ProfileHeader = () => {
+  const dispatch = useDispatch()
+
+  const handleLogout = () => {
+    localStorage.removeItem('user')
+    localStorage.removeItem('token')
+    dispatch(unsetUser())
+  }
+
   return (
     <header>
       <nav className={classes.nav}>
@@ -80,7 +89,7 @@ const ProfileHeader = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink
+              <NavLink onClick={handleLogout}
                 className={({ isActive }) =>
                   isActive ? classes.active : undefined
                 }

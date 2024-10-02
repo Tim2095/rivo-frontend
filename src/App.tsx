@@ -6,6 +6,7 @@ import Login from "./components/pages/Login";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "./reduers/userReducer";
 import { useEffect } from "react";
+import Tasks from "./components/tasks/Tasks";
 
 interface User {
   id: string;
@@ -43,6 +44,7 @@ function App() {
         />
         <Route path="signup" element={<Signup />} />
         <Route path="login" element={<Login />} />
+        <Route path="tasks" element={<Tasks />} />
       </Routes>
     </div>
   );
