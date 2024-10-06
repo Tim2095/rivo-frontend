@@ -5,7 +5,7 @@ import Signup from "./components/pages/Signup";
 import Login from "./components/pages/Login";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "./reduers/userReducer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Tasks from "./components/tasks/Tasks";
 
 interface User {
@@ -17,10 +17,11 @@ interface User {
 }
 
 interface RootState {
-  users: User[];
+  users: User[] | null;
 }
 
 function App() {
+  const [isLoading, setIsLoading] = useState<boolean>(true)
   const user = useSelector((state: RootState) => state.users);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -30,7 +31,12 @@ function App() {
       const user = JSON.parse(storedUser);
       dispatch(setUser(user));
     }
+    setIsLoading(false)
   }, [dispatch]);
+
+  if(isLoading) {
+    return <p>Loading...</p>
+  }
 
   return (
     <div className="container">
@@ -39,7 +45,7 @@ function App() {
         <Route
           path="/"
           element={
-            user.length === 0 ? <Home /> : <Navigate replace to="/tasks" />
+            user!.length === 0 ? <Home /> : <Navigate replace to="/tasks" />
           }
         />
         <Route path="signup" element={<Signup />} />

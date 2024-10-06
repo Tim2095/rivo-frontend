@@ -1,30 +1,16 @@
 import { FormEvent, useState } from "react";
 import classes from "./login.module.scss";
 import loginServices from "../../services/login";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setUser } from "../../reduers/userReducer";
 import { useNavigate } from "react-router-dom";
-
-type User = {
-  id: string;
-  email: string;
-  firstname: string;
-  lastname: string;
-  age: string;
-};
-
-interface RootState {
-  users: User[];
-}
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [loginError, setLoginError] = useState<string>("");
   const dispatch = useDispatch();
-  const navigate = useNavigate()
-
-  const user = useSelector((state: RootState) => state.users);
+  const navigate = useNavigate();
 
   const onSubmitForm = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -42,6 +28,7 @@ const Login = () => {
           firstname: loggedUser.firstname,
           lastname: loggedUser.lastname,
           age: loggedUser.age,
+          tasks: loggedUser.tasks,
         })
       );
 
@@ -53,11 +40,12 @@ const Login = () => {
           firstname: loggedUser.firstname,
           lastname: loggedUser.lastname,
           age: loggedUser.age,
+          tasks: loggedUser.tasks
         })
       );
 
       localStorage.setItem("token", JSON.stringify(loggedUser.token));
-      navigate('/tasks')
+      navigate("/tasks");
     } catch (err) {
       if (err instanceof Error) {
         const errorMessage =

@@ -6,6 +6,7 @@ export type User = {
   lastname: string;
   email: string;
   age: string;
+  tasks: []
 };
 
 const initialState: User[] = [];
