@@ -6,7 +6,7 @@ export type User = {
   lastname: string;
   email: string;
   age: string;
-  tasks: []
+  tasks: [];
 };
 
 const initialState: User[] = [];
@@ -15,8 +15,8 @@ const userSlice = createSlice({
   name: "users",
   initialState,
   reducers: {
-    setUser(state, action: PayloadAction<User[]>) {
-      return action.payload;
+    setUser(state, action: PayloadAction<User>) {
+      state.push(action.payload);
     },
 
     unsetUser() {
