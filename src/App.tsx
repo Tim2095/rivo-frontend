@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "./reduers/userReducer";
 import { useEffect, useState } from "react";
 import Tasks from "./components/tasks/Tasks";
+import NewTask from "./components/tasks/NewTask";
 
 interface User {
   id: string;
@@ -50,7 +51,8 @@ function App() {
         />
         <Route path="signup" element={<Signup />} />
         <Route path="login" element={<Login />} />
-        {user.length !== 0 && <Route path="tasks" element={<Tasks />} />}
+        {user!.length !== 0 && <Route path="tasks" element={<Tasks />} />}
+        {user!.length !== 0 && <Route path="new-task" element={<NewTask />} />}
       </Routes>
     </div>
   );
