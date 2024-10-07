@@ -1,0 +1,23 @@
+.task {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  gap: 2rem;
+  height: 80vh;
+  background-color: #dce5e2;
+  margin-top: 3rem;
+  border-radius: 3.2rem;
+  -webkit-border-radius: 3.2rem;
+  -moz-border-radius: 3.2rem;
+  -ms-border-radius: 3.2rem;
+  -o-border-radius: 3.2rem;
+  font-size: 2rem;
+
+
+  .add-task-btn {
+    padding: 1rem 3rem;
+    background: none;
+    cursor: pointer;
+  }
+}
