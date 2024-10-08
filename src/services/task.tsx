@@ -16,13 +16,14 @@ const createTask = async (task: Task) => {
 
     const parsedToken = JSON.parse(token);
 
+
     const config = {
       headers: {
         Authorization: `Bearer ${parsedToken}`,
       },
     };
 
-    const response = await axios.put(baseUrl, task, config);
+    const response = await axios.post(baseUrl, task, config);
     return response.data;
   } catch (err) {
     console.log("error creating task", err);
