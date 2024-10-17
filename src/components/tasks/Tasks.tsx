@@ -33,7 +33,7 @@ const Tasks = () => {
           </div>
         ) : (
           <div className={classes.task} key={user.id}>
-            <h3>Hello {user.firstname}</h3>
+            {user.tasks.map(task => <li>{task.title}</li>)}
           </div>
         )
       )}
