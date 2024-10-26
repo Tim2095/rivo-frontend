@@ -108,7 +108,7 @@ const ProfileHeader = () => {
 const Header = () => {
   const users = useSelector((state: RootState) => state.users);
 
-  return users.length === 0 ? <MainHeader /> : <ProfileHeader />;
+  return !users ? <MainHeader /> : <ProfileHeader />;
 };
 
 export default Header;

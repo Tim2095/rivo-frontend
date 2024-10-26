@@ -9,14 +9,14 @@ export type User = {
   tasks: [];
 };
 
-const initialState: User[] = [];
+const initialState: User | null = null;
 
 const userSlice = createSlice({
   name: "users",
   initialState,
   reducers: {
     setUser(state, action: PayloadAction<User>) {
-      state.push(action.payload);
+      return action.payload
     },
 
     unsetUser() {

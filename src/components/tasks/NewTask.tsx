@@ -2,18 +2,19 @@ import classes from "./newTask.module.scss";
 import taskService from "../../services/task";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, UseDispatch } from "react-redux";
-import { setUser } from "../../reduers/userReducer";
 
-const NewTask = () => {
-  const dispatch = useDispatch()
+interface onAddTask {
+  onAddNewTask: (task: any) => void;
+}
+
+const NewTask = ({ onAddNewTask }: onAddTask) => {
   const taskTitle = useRef<HTMLInputElement>(null);
   const taskDescription = useRef<HTMLTextAreaElement>(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const onAddTask = async (event: React.FormEvent) => {
     event.preventDefault();
-    
+
     const newTask = {
       title: taskTitle.current!.value,
       description: taskDescription.current!.value,
@@ -23,8 +24,8 @@ const NewTask = () => {
 
     localStorage.removeItem("user");
     localStorage.setItem("user", JSON.stringify(response.user));
-    dispatch(setUser(response.user))
-    navigate('/tasks')
+    onAddNewTask(response.user)
+    navigate("/tasks");
   };
 
   return (

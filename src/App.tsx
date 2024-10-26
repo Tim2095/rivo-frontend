@@ -39,6 +39,10 @@ function App() {
     return <p>Loading...</p>
   }
 
+  const showTask = (task) => {
+    dispatch(setUser(task))
+  }
+
   return (
     <div className="container">
       <Header />
@@ -46,13 +50,13 @@ function App() {
         <Route
           path="/"
           element={
-            user!.length === 0 ? <Home /> : <Navigate replace to="/tasks" />
+            !user  ? <Home /> : <Navigate replace to="/tasks" />
           }
         />
         <Route path="signup" element={<Signup />} />
         <Route path="login" element={<Login />} />
-        {user!.length !== 0 && <Route path="tasks" element={<Tasks />} />}
-        {user!.length !== 0 && <Route path="new-task" element={<NewTask />} />}
+        {user && <Route path="tasks" element={<Tasks />} />}
+        {user && <Route path="new-task" element={<NewTask onAddNewTask={showTask} />} />}
       </Routes>
     </div>
   );
