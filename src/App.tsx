@@ -29,7 +29,6 @@ function App() {
     const storedUser = localStorage.getItem("user");
 
     if (storedUser) {
-      console.log('apa')
       const user = JSON.parse(storedUser);
       dispatch(setUser(user));
     }
