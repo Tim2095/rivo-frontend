@@ -62,13 +62,13 @@ const MainHeader = () => {
 };
 
 const ProfileHeader = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleLogout = () => {
-    localStorage.removeItem('user')
-    localStorage.removeItem('token')
-    dispatch(unsetUser())
-  }
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    dispatch(unsetUser());
+  };
 
   return (
     <header>
@@ -89,7 +89,18 @@ const ProfileHeader = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink onClick={handleLogout}
+            <NavLink
+                className={({ isActive }) =>
+                  isActive ? classes.active : undefined
+                }
+                to="/new-task"
+              >
+                New Task
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                onClick={handleLogout}
                 className={({ isActive }) =>
                   isActive ? classes.active : undefined
                 }

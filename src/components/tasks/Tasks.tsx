@@ -38,7 +38,6 @@ const Tasks = () => {
         <div className={classes.cnt}>
           <nav className={classes.nav}>
             <li>All</li>
-            <li>Deleted</li>
             <li>Completed</li>
           </nav>
           <div className={classes.task}>
