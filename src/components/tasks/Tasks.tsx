@@ -33,15 +33,22 @@ const Tasks = () => {
   };
 
   return (
-    <div>
+    <div className={classes["main-cnt"]}>
       {user?.tasks && user.tasks.length > 0 ? (
-        <div className={classes.task}>
-          {user.tasks.map((task: Task) => (
-            <div key={task.id} className={classes["task-cnt"]}>
-              <h3>{task.title}</h3>
-              <p>{task.description}</p>
-            </div>
-          ))}
+        <div className={classes.cnt}>
+          <nav className={classes.nav}>
+            <li>All</li>
+            <li>Deleted</li>
+            <li>Completed</li>
+          </nav>
+          <div className={classes.task}>
+            {user.tasks.map((task: Task) => (
+              <div key={task.id} className={classes["task-cnt"]}>
+                <h3>{task.title}</h3>
+                <p>{task.description}</p>
+              </div>
+            ))}
+          </div>
         </div>
       ) : (
         <div className={classes.task}>
