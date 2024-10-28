@@ -1,23 +1,64 @@
+$background-color: #f5f5f5;
+$task-background: #ffffff;
+$primary-color: #00796b;
+$secondary-color: #ffab40;
+$text-color: #333333;
+$completed-task-color: #b0bec5;
+$border-radius: 8px;
+$font-family: 'Roboto', sans-serif;
+
+
 .task {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-flow: column;
-  gap: 2rem;
-  height: 80vh;
-  background-color: #dce5e2;
-  margin-top: 3rem;
-  border-radius: 3.2rem;
-  -webkit-border-radius: 3.2rem;
-  -moz-border-radius: 3.2rem;
-  -ms-border-radius: 3.2rem;
-  -o-border-radius: 3.2rem;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  background-color: $background-color;
+  border-radius: $border-radius;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: $font-family;
+  color: $text-color;
+  max-width: 600px;
+  margin: 0 auto;
   font-size: 2rem;
 
+  // Styling each task item container
+  &-cnt {
+    background-color: $task-background;
+    padding: 1rem;
+    border-radius: $border-radius;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
 
-  .add-task-btn {
-    padding: 1rem 3rem;
-    background: none;
-    cursor: pointer;
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    // Style for task title and description
+    p {
+      margin: 0;
+      &:first-of-type {
+        font-weight: bold;
+        color: $primary-color;
+        margin-bottom: 0.25rem;
+      }
+
+      &:last-of-type {
+        color: darken($text-color, 10%);
+      }
+    }
+
+    &::before {
+      content: "";
+      width: 4px;
+      height: 100%;
+      background-color: $primary-color;
+      position: absolute;
+      left: 0;
+      top: 0;
+      border-radius: 8px 0 0 8px;
+    }
   }
 }

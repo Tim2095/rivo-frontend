@@ -19,15 +19,13 @@ interface User {
   tasks: Task[];
 }
 
-
-
 interface RootState {
   users: User[];
 }
 
 const Tasks = () => {
+  // Select the first user in this example or adjust based on the actual logged-in user
   const user = useSelector((state: RootState) => state.users);
-  console.log(user);
   const navigate = useNavigate();
 
   const handleAddTaskBtn = () => {
@@ -36,7 +34,16 @@ const Tasks = () => {
 
   return (
     <div>
-      {!user ? (
+      {user?.tasks && user.tasks.length > 0 ? (
+        <div className={classes.task}>
+          {user.tasks.map((task: Task) => (
+            <div key={task.id} className={classes["task-cnt"]}>
+              <h3>{task.title}</h3>
+              <p>{task.description}</p>
+            </div>
+          ))}
+        </div>
+      ) : (
         <div className={classes.task}>
           <h3>You have no tasks yet</h3>
           <button
@@ -45,15 +52,6 @@ const Tasks = () => {
           >
             Add Task
           </button>
-        </div>
-      ) : (
-        <div className={classes.task}>
-          {user.tasks.map((task: Task) => (
-            <div key={task.id}>
-              <p>{task.title}</p>
-              <p>{task.description}</p>
-            </div>
-          ))}
         </div>
       )}
     </div>
