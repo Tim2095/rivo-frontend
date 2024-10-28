@@ -9,6 +9,18 @@
   max-width: 50%;
   margin: 10rem auto;
 
+  .btn-cnt {
+    font-size: 1.6rem;
+    width: 50%;
+    display: flex;
+    justify-content: space-evenly;
+    background-color: red;
+
+    button {
+      width: 50%;
+    }
+  }
+
 
   p {
     font-size: 1.6rem;

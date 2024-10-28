@@ -18,6 +18,10 @@ const Task = () => {
     <div className={classes.task}>
       <h2>{task.title}</h2>
       <p>{task.description}</p>
+      <div className={classes['btn-cnt']}>
+        <button>complete</button>
+        <button>edit</button>
+      </div>
     </div>
   );
 };
