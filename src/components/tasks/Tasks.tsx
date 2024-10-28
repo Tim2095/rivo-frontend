@@ -45,6 +45,7 @@ const Tasks = () => {
               <div key={task.id} className={classes["task-cnt"]}>
                 <h3>{task.title}</h3>
                 <p>{task.description}</p>
+                <button className={classes['view-task-btn']}>view</button>
               </div>
             ))}
           </div>
