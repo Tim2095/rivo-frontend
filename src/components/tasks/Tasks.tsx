@@ -1,6 +1,6 @@
 import classes from "./tasks.module.scss";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 
 type Task = {
   id: string;
@@ -32,6 +32,10 @@ const Tasks = () => {
     navigate("/new-task");
   };
 
+  const viewTask = (id: string) => {
+    navigate(`/tasks/${id}`)
+  }
+
   return (
     <div className={classes["main-cnt"]}>
       {user?.tasks && user.tasks.length > 0 ? (
@@ -45,7 +49,7 @@ const Tasks = () => {
               <div key={task.id} className={classes["task-cnt"]}>
                 <h3>{task.title}</h3>
                 <p>{task.description}</p>
-                <button className={classes['view-task-btn']}>view</button>
+                <button className={classes['view-task-btn']} onClick={() => viewTask(task.id)}>view</button>
               </div>
             ))}
           </div>

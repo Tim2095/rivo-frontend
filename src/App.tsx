@@ -9,8 +9,8 @@ import { useEffect, useState } from "react";
 import Tasks from "./components/tasks/Tasks";
 import NewTask from "./components/tasks/NewTask";
 import { jwtDecode } from "jwt-decode";
-import { UseDispatch } from "react-redux";
 import { unsetUser } from "./reduers/userReducer";
+import Task from './components/tasks/Task'
 
 
 interface User {
@@ -75,6 +75,7 @@ function App() {
         <Route path="signup" element={<Signup />} />
         <Route path="login" element={<Login />} />
         {user && <Route path="tasks" element={<Tasks />} />}
+        {user && <Route path="tasks/:id" element={<Task />} />}
         {user && (
           <Route
             path="new-task"
