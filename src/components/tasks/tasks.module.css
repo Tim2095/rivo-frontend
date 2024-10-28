@@ -1,0 +1,102 @@
+.main-cnt .cnt {
+  position: relative;
+}
+.main-cnt .nav {
+  display: flex;
+  flex-direction: column;
+  background-color: #f0f0f0;
+  padding: 15px;
+  border-radius: 8px;
+  width: 150px;
+  list-style-type: none;
+  position: absolute;
+  top: 0;
+  left: 10%;
+  font-size: 2rem;
+}
+.main-cnt .nav li {
+  padding: 10px 5px;
+  cursor: pointer;
+  color: #333;
+  font-weight: 600;
+  text-align: left;
+}
+.main-cnt .nav li:hover {
+  color: #007bff;
+}
+.main-cnt .task {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  padding-bottom: 4rem;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: "Roboto", sans-serif;
+  color: #333333;
+  max-width: 70rem;
+  margin: 0 auto;
+  font-size: 2rem;
+  margin-top: 2rem;
+  position: relative;
+}
+.main-cnt .task .view-task-btn {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 1rem;
+  background: none;
+  border: 1px solid black;
+  padding: 0.5rem 2rem;
+  cursor: pointer;
+}
+.main-cnt .task .view-task-btn:hover {
+  color: #007bff;
+}
+.main-cnt .task-cnt {
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  max-width: 40rem;
+  min-width: 40rem;
+  min-height: 15rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.main-cnt .task-cnt:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+.main-cnt .task-cnt p {
+  margin: 0;
+}
+.main-cnt .task-cnt p:first-of-type {
+  color: #00796b;
+  margin-bottom: 0.25rem;
+  font-size: 1.4rem;
+  padding-bottom: 3rem;
+}
+.main-cnt .task-cnt p:last-of-type {
+  color: #1a1a1a;
+}
+.main-cnt .task-cnt::before {
+  content: "";
+  width: 4px;
+  height: 100%;
+  background-color: #00796b;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 8px 0 0 8px;
+  -webkit-border-radius: 8px 0 0 8px;
+  -moz-border-radius: 8px 0 0 8px;
+  -ms-border-radius: 8px 0 0 8px;
+  -o-border-radius: 8px 0 0 8px;
+}/*# sourceMappingURL=tasks.module.css.map */

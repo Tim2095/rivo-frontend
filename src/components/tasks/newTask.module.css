@@ -1,0 +1,29 @@
+.form {
+  margin: 0 auto;
+  height: 80vh;
+  background-color: #dce5e2;
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  font-size: 1.6rem;
+  border-radius: 3.2rem;
+}
+.form .task-cnt {
+  width: 40%;
+  font-size: 1.8rem;
+}
+.form .task-item {
+  display: flex;
+  flex-direction: column;
+}
+.form .task-btn {
+  margin-top: 1rem;
+  text-align: center;
+}
+.form .task-btn button {
+  cursor: pointer;
+  padding: 1rem 2rem;
+  background: none;
+}/*# sourceMappingURL=newTask.module.css.map */
