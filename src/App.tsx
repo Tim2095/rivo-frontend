@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import Header from "./components/header/Header";
 import Home from "./components/pages/Home";
 import Signup from "./components/pages/Signup";
@@ -8,6 +8,10 @@ import { setUser } from "./reduers/userReducer";
 import { useEffect, useState } from "react";
 import Tasks from "./components/tasks/Tasks";
 import NewTask from "./components/tasks/NewTask";
+import { jwtDecode } from "jwt-decode";
+import { UseDispatch } from "react-redux";
+import { unsetUser } from "./reduers/userReducer";
+
 
 interface User {
   id: string;
@@ -22,9 +26,12 @@ interface RootState {
 }
 
 function App() {
-  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+ 
+
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const user = useSelector((state: RootState) => state.users);
-  const dispatch = useDispatch();
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
 
@@ -32,16 +39,30 @@ function App() {
       const user = JSON.parse(storedUser);
       dispatch(setUser(user));
     }
-    setIsLoading(false)
+
+    const token = localStorage.getItem("token");
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      const expirationTime = decodedToken.exp * 1000
+  
+      if (Date.now() > expirationTime) {
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        dispatch(unsetUser());
+        navigate('/')
+      }
+    }
+
+    setIsLoading(false);
   }, [dispatch]);
 
-  if(isLoading) {
-    return <p>Loading...</p>
+  if (isLoading) {
+    return <p>Loading...</p>;
   }
 
   const showTask = (task) => {
-    dispatch(setUser(task))
-  }
+    dispatch(setUser(task));
+  };
 
   return (
     <div className="container">
@@ -49,14 +70,17 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={
-            !user  ? <Home /> : <Navigate replace to="/tasks" />
-          }
+          element={!user ? <Home /> : <Navigate replace to="/tasks" />}
         />
         <Route path="signup" element={<Signup />} />
         <Route path="login" element={<Login />} />
         {user && <Route path="tasks" element={<Tasks />} />}
-        {user && <Route path="new-task" element={<NewTask onAddNewTask={showTask} />} />}
+        {user && (
+          <Route
+            path="new-task"
+            element={<NewTask onAddNewTask={showTask} />}
+          />
+        )}
       </Routes>
     </div>
   );

@@ -45,6 +45,7 @@ const Login = () => {
       );
 
       localStorage.setItem("token", JSON.stringify(loggedUser.token));
+
       navigate("/tasks");
     } catch (err) {
       if (err instanceof Error) {
