@@ -42,7 +42,7 @@ function App() {
 
     const token = localStorage.getItem("token");
     if (token) {
-      const decodedToken = jwtDecode(token);
+      const decodedToken = jwtDecode(token); 
       const expirationTime = decodedToken.exp * 1000
   
       if (Date.now() > expirationTime) {
@@ -60,7 +60,7 @@ function App() {
     return <p>Loading...</p>;
   }
 
-  const showTask = (task) => {
+  const addNewTask = (task) => {
     dispatch(setUser(task));
   };
 
@@ -79,7 +79,7 @@ function App() {
         {user && (
           <Route
             path="new-task"
-            element={<NewTask onAddNewTask={showTask} />}
+            element={<NewTask onAddNewTask={addNewTask} />}
           />
         )}
       </Routes>

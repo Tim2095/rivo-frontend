@@ -31,8 +31,9 @@ const createTask = async (task: Task) => {
 };
 
 
-const updateCompleteTask = async (taskId: string) => {
-  const response = await axios.patch(`${baseUrl}/complete`, {taskId})
+const updateCompleteTask = async (taskId: string, userId: string) => {
+  const response = await axios.patch(`${baseUrl}/complete`, {taskId, userId})
+  console.log(response.data)
   return response.data
 }
 

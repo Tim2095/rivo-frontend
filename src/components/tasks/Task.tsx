@@ -11,6 +11,7 @@ interface RootState {
 const Task = () => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const { id } = useParams<{ id: string }>();
+  const user = useSelector((state: RootState) => state.users)
   const task = useSelector((state: RootState) => {
     return state.users.tasks.find((task) => task.id === id);
   });
@@ -20,9 +21,9 @@ const Task = () => {
   }
 
 
-  const handleCompleteTask = async (taskId: string) => {
+  const handleCompleteTask = async (taskId: string, userId: string) => {
     console.log(taskId)
-    await taskServices.updateCompleteTask(taskId)
+    await taskServices.updateCompleteTask(taskId, userId)
 
   }
 
@@ -44,7 +45,7 @@ const Task = () => {
         <>
         
          {!isEditing ? <button onClick={() => setIsEditing(true)}>Edit</button> : 
-          <button onClick={() => handleCompleteTask(task.id)}>save</button>
+          <button onClick={() => handleCompleteTask(task.id, user.id)}>save</button>
          }
         </>
       </div>
