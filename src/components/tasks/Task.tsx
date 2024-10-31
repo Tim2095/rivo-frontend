@@ -15,7 +15,11 @@ type Task = {
   completed: boolean
 }
 
-const Task = () => {
+interface TaskComplete {
+  onTaskComple: (data: any) => void
+}
+
+const Task = ({onTaskComplete} : TaskComplete) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const { id } = useParams<{ id: string }>();
   const user = useSelector((state: RootState) => state.users)
@@ -30,7 +34,9 @@ const Task = () => {
 
 
   const handleCompleteTask = async (taskId: string, userId: string) => {
-    await taskServices.updateCompleteTask(taskId, userId)
+    const response = await taskServices.updateCompleteTask(taskId, userId)
+    console.log(response)
+    onTaskComplete(response.user)
 
   }
 
@@ -49,11 +55,11 @@ const Task = () => {
         </>
       )}
       <div className={classes["btn-cnt"]}>
-        <button>Complete</button>
+        <button onClick={() => handleCompleteTask(task.id, user.id)}>Complete</button>
         <>
         
          {!isEditing ? <button onClick={() => setIsEditing(true)}>Edit</button> : 
-          <button onClick={() => handleCompleteTask(task.id, user.id)}>save</button>
+          <button>save</button>
          }
         </>
       </div>

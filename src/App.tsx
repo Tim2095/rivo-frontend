@@ -10,8 +10,7 @@ import Tasks from "./components/tasks/Tasks";
 import NewTask from "./components/tasks/NewTask";
 import { jwtDecode } from "jwt-decode";
 import { unsetUser } from "./reduers/userReducer";
-import Task from './components/tasks/Task'
-
+import Task from "./components/tasks/Task";
 
 interface User {
   id: string;
@@ -26,9 +25,8 @@ interface RootState {
 }
 
 function App() {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
- 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const user = useSelector((state: RootState) => state.users);
@@ -42,14 +40,14 @@ function App() {
 
     const token = localStorage.getItem("token");
     if (token) {
-      const decodedToken = jwtDecode(token); 
-      const expirationTime = decodedToken.exp * 1000
-  
+      const decodedToken = jwtDecode(token);
+      const expirationTime = decodedToken.exp * 1000;
+
       if (Date.now() > expirationTime) {
         localStorage.removeItem("user");
         localStorage.removeItem("token");
         dispatch(unsetUser());
-        navigate('/')
+        navigate("/");
       }
     }
 
@@ -62,6 +60,7 @@ function App() {
 
   const addNewTask = (task) => {
     dispatch(setUser(task));
+    console.log(task)
   };
 
   return (
@@ -75,7 +74,12 @@ function App() {
         <Route path="signup" element={<Signup />} />
         <Route path="login" element={<Login />} />
         {user && <Route path="tasks" element={<Tasks />} />}
-        {user && <Route path="tasks/:id" element={<Task />} />}
+        {user && (
+          <Route
+            path="tasks/:id"
+            element={<Task onTaskComplete={addNewTask} />}
+          />
+        )}
         {user && (
           <Route
             path="new-task"
