@@ -16,7 +16,6 @@ const createTask = async (task: Task) => {
 
     const parsedToken = JSON.parse(token);
 
-
     const config = {
       headers: {
         Authorization: `Bearer ${parsedToken}`,
@@ -26,18 +25,23 @@ const createTask = async (task: Task) => {
     const response = await axios.post(baseUrl, task, config);
     return response.data;
   } catch (err) {
-    console.log("error creating task", err);
+    console.error("Error creating task:", err);
+    throw err; 
   }
 };
 
-
 const updateCompleteTask = async (taskId: string, userId: string) => {
-  const response = await axios.patch(`${baseUrl}/complete`, {taskId, userId})
-  console.log(response.data)
-  return response.data
-}
+  try {
+    const response = await axios.patch(`${baseUrl}/complete`, { taskId, userId });
+    console.log("Task update response:", response.data);
+    return response.data;
+  } catch (err) {
+    console.error("Error updating task completion status:", err);
+    throw err; 
+  }
+};
 
 export default {
   createTask,
-  updateCompleteTask
+  updateCompleteTask,
 };

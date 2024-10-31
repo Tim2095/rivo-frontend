@@ -20,12 +20,16 @@ const NewTask = ({ onAddNewTask }: onAddTask) => {
       description: taskDescription.current!.value,
     };
 
-    const response = await taskService.createTask(newTask);
-
-    localStorage.removeItem("user");
-    localStorage.setItem("user", JSON.stringify(response.user));
-    onAddNewTask(response.user)
-    navigate("/tasks");
+    try {
+      const response = await taskService.createTask(newTask);
+      localStorage.removeItem("user");
+      localStorage.setItem("user", JSON.stringify(response.user));
+      onAddNewTask(response.user);
+      navigate("/tasks");
+    } catch (error) {
+      console.error("Failed to create task:", error);
+      alert("An error occurred while creating the task. Please try again.");
+    }
   };
 
   return (
