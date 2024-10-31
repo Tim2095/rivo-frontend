@@ -1,6 +1,7 @@
+import { useState } from "react";
 import classes from "./tasks.module.scss";
 import { useSelector } from "react-redux";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 type Task = {
   id: string;
@@ -24,9 +25,17 @@ interface RootState {
 }
 
 const Tasks = () => {
-  // Select the first user in this example or adjust based on the actual logged-in user
   const user = useSelector((state: RootState) => state.users);
   const navigate = useNavigate();
+  const [tasks, setTasks] = useState<string>('all')
+
+  const filteredTasks = user.tasks.filter(task => {
+    if(tasks === 'all') {
+      return task 
+    } else {
+      return task.completed === true
+    }
+  })
 
   const handleAddTaskBtn = () => {
     navigate("/new-task");
@@ -41,11 +50,11 @@ const Tasks = () => {
       {user?.tasks && user.tasks.length > 0 ? (
         <div className={classes.cnt}>
           <nav className={classes.nav}>
-            <li>All</li>
-            <li>Completed</li>
-          </nav>
+            <li onClick={() => setTasks('all')}>All</li>
+            <li onClick={() => setTasks('completed')}>Completed</li>
+          </nav> 
           <div className={classes.task}>
-            {user.tasks.map((task: Task) => (
+            {filteredTasks.map((task: Task) => (
               <div key={task.id} className={classes["task-cnt"]}>
                 <h3>{task.title}</h3>
                 <p>{task.description}</p>

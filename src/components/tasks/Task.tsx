@@ -8,13 +8,21 @@ interface RootState {
   users: User[] | null;
 }
 
+type Task = {
+  id: string,
+  title: string,
+  description: string,
+  completed: boolean
+}
+
 const Task = () => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const { id } = useParams<{ id: string }>();
   const user = useSelector((state: RootState) => state.users)
   const task = useSelector((state: RootState) => {
-    return state.users.tasks.find((task) => task.id === id);
+    return state.users.tasks.find((task: Task) => task.id === id);
   });
+
 
   if (!task) {
     return <p>Task not found</p>;
@@ -22,7 +30,6 @@ const Task = () => {
 
 
   const handleCompleteTask = async (taskId: string, userId: string) => {
-    console.log(taskId)
     await taskServices.updateCompleteTask(taskId, userId)
 
   }
@@ -33,6 +40,7 @@ const Task = () => {
         <>
           <h2>{task.title}</h2>
           <p>{task.description}</p>
+          <p>{task.completed ? 'Completed' : 'Not'}</p>
         </>
       ) : (
         <>
