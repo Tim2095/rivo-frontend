@@ -41,9 +41,9 @@ const updateCompleteTask = async (taskId: string, userId: string) => {
   }
 };
 
-const editTask = async (taskId: string, userId: string) => {
+const editTask = async (taskId: string, userId: string, taskTitle: string, taskDescription: string) => {
   try{
-    const response = await axios.put(`${baseUrl}/edit`, {taskId, userId})
+    const response = await axios.put(`${baseUrl}/edit`, {taskId, userId, taskTitle, taskDescription})
     return response.data
   } catch(err) {
     console.log('Error editing task', err)

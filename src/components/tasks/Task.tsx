@@ -30,12 +30,13 @@ interface TaskComplete {
 
 const Task = ({onTaskComplete} : TaskComplete) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [taskTitle, setTaskTitle] = useState<string>('')
+  const [taskDescription, setTaskDescription] = useState<string>('')
   const { id } = useParams<{ id: string }>();
   const user = useSelector((state: RootState) => state.users)
   const task = useSelector((state: RootState) => {
     return state.users.tasks.find((task: Task) => task.id === id);
   });
-
 
   if (!task) {
     return <p>Task not found</p>;
@@ -44,12 +45,12 @@ const Task = ({onTaskComplete} : TaskComplete) => {
 
   const handleCompleteTask = async (taskId: string, userId: string) => {
     const response = await taskServices.updateCompleteTask(taskId, userId)
-    console.log(response)
+  
     onTaskComplete(response.user)
   }
 
-  const handleEditTask = async (taskId: string, userId: string) => {
-    await taskServices.editTask(taskId, userId)
+  const handleEditTask = async (taskId: string, userId: string, taskTitle: string, taskDescription: string) => {
+    await taskServices.editTask(taskId, userId, taskTitle, taskDescription)
   }
 
   return (
@@ -62,8 +63,8 @@ const Task = ({onTaskComplete} : TaskComplete) => {
         </>
       ) : (
         <>
-          <input type="text" defaultValue={task.title} />
-          <input type="text" defaultValue={task.description} />
+          <input type="text" defaultValue={task.title} onChange={(e) => setTaskTitle(e.target.value)} />
+          <input type="text" defaultValue={task.description} onChange={(e) => setTaskDescription(e.target.value)} />
         </>
       )}
       <div className={classes["btn-cnt"]}>
@@ -71,7 +72,7 @@ const Task = ({onTaskComplete} : TaskComplete) => {
         <>
         
          {!isEditing ? <button onClick={() => setIsEditing(true)}>Edit</button> : 
-          <button onClick={() => handleEditTask(task.id, user.id)}>save</button>
+          <button onClick={() => handleEditTask(task.id, user.id, taskTitle, taskDescription)}>save</button>
          }
         </>
       </div>
