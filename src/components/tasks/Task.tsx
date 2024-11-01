@@ -55,7 +55,7 @@ const Task = ({onTaskComplete} : TaskComplete) => {
         </>
       )}
       <div className={classes["btn-cnt"]}>
-        <button onClick={() => handleCompleteTask(task.id, user.id)}>Complete</button>
+        <button onClick={() => handleCompleteTask(task.id, user.id)} disabled={task.completed ? true : false}>Complete</button>
         <>
         
          {!isEditing ? <button onClick={() => setIsEditing(true)}>Edit</button> : 
