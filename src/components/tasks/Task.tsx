@@ -4,6 +4,15 @@ import classes from "./task.module.scss";
 import { useState } from "react";
 import taskServices from '../../services/task'
 
+type User = {
+  id: string;
+  firstname: string;
+  lastname: string;
+  email: string;
+  age: string;
+  tasks: Task[]
+}
+
 interface RootState {
   users: User[] | null;
 }
@@ -37,7 +46,10 @@ const Task = ({onTaskComplete} : TaskComplete) => {
     const response = await taskServices.updateCompleteTask(taskId, userId)
     console.log(response)
     onTaskComplete(response.user)
+  }
 
+  const handleEditTask = async (taskId: string, userId: string) => {
+    await taskServices.editTask(taskId, userId)
   }
 
   return (
@@ -59,7 +71,7 @@ const Task = ({onTaskComplete} : TaskComplete) => {
         <>
         
          {!isEditing ? <button onClick={() => setIsEditing(true)}>Edit</button> : 
-          <button>save</button>
+          <button onClick={() => handleEditTask(task.id, user.id)}>save</button>
          }
         </>
       </div>
