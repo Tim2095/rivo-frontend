@@ -25,10 +25,11 @@ type Task = {
 }
 
 interface TaskComplete {
-  onTaskComple: (data: any) => void
+  onTaskComple: (data: any) => void,
+  onTaskUpdate: (data: any) => void
 }
 
-const Task = ({onTaskComplete} : TaskComplete) => {
+const Task = ({onTaskComplete, onTaskUpdate} : TaskComplete) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [taskTitle, setTaskTitle] = useState<string>('')
   const [taskDescription, setTaskDescription] = useState<string>('')
@@ -45,12 +46,15 @@ const Task = ({onTaskComplete} : TaskComplete) => {
 
   const handleCompleteTask = async (taskId: string, userId: string) => {
     const response = await taskServices.updateCompleteTask(taskId, userId)
-  
     onTaskComplete(response.user)
+    setIsEditing(false)
   }
 
+
   const handleEditTask = async (taskId: string, userId: string, taskTitle: string, taskDescription: string) => {
-    await taskServices.editTask(taskId, userId, taskTitle, taskDescription)
+    const response = await taskServices.editTask(taskId, userId, taskTitle, taskDescription)
+    console.log(response.user)
+    onTaskUpdate(response.user)
   }
 
   return (

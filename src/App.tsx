@@ -31,6 +31,7 @@ function App() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const user = useSelector((state: RootState) => state.users);
   useEffect(() => {
+    console.log('App ran')
     const storedUser = localStorage.getItem("user");
 
     if (storedUser) {
@@ -60,7 +61,6 @@ function App() {
 
   const addNewTask = (task) => {
     dispatch(setUser(task));
-    console.log(task)
   };
 
   return (
@@ -77,7 +77,7 @@ function App() {
         {user && (
           <Route
             path="tasks/:id"
-            element={<Task onTaskComplete={addNewTask} />}
+            element={<Task onTaskComplete={addNewTask} onTaskUpdate={addNewTask} />}
           />
         )}
         {user && (
