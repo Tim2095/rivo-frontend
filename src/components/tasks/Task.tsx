@@ -92,18 +92,19 @@ const Task = ({ onTaskComplete, onTaskUpdate }: TaskComplete) => {
           <p>{task.completed ? "Completed" : "Not"}</p>
         </>
       ) : (
-        <>
+        <div className={classes["inp-cnt"]}>
           <input
             type="text"
             defaultValue={task.title}
             onChange={(e) => setTaskTitle(e.target.value)}
           />
-          <input
-            type="text"
+          <textarea
+            rows={5}
+            cols={30}
             defaultValue={task.description}
             onChange={(e) => setTaskDescription(e.target.value)}
           />
-        </>
+        </div>
       )}
       <div className={classes["btn-cnt"]}>
         <button
