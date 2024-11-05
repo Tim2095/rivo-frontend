@@ -2,12 +2,12 @@ import classes from "./newTask.module.scss";
 import taskService from "../../services/task";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../reduers/userReducer";
 
-interface onAddTask {
-  onAddNewTask: (task: any) => void;
-}
 
-const NewTask = ({ onAddNewTask }: onAddTask) => {
+const NewTask = () => {
+  const dispatch = useDispatch()
   const taskTitle = useRef<HTMLInputElement>(null);
   const taskDescription = useRef<HTMLTextAreaElement>(null);
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ const NewTask = ({ onAddNewTask }: onAddTask) => {
       const response = await taskService.createTask(newTask);
       localStorage.removeItem("user");
       localStorage.setItem("user", JSON.stringify(response.user));
-      onAddNewTask(response.user);
+      dispatch(setUser(response.user))
       navigate("/tasks");
     } catch (error) {
       console.error("Failed to create task:", error);

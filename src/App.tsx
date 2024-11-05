@@ -60,9 +60,6 @@ function App() {
     return <p>Loading...</p>;
   }
 
-  const addNewTask = (task) => {
-    dispatch(setUser(task));
-  };
 
   return (
     <div className="container">
@@ -78,13 +75,13 @@ function App() {
         {user && (
           <Route
             path="tasks/:id"
-            element={<Task onTaskComplete={addNewTask} onTaskUpdate={addNewTask} />}
+            element={<Task />}
           />
         )}
         {user && (
           <Route
             path="new-task"
-            element={<NewTask onAddNewTask={addNewTask} />}
+            element={<NewTask />}
           />
         )}
       </Routes>

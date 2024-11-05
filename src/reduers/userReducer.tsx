@@ -19,19 +19,12 @@ const userSlice = createSlice({
       return action.payload
     },
 
-    updateUserTask(state, action: PayloadAction) {
-      if (state.users) {
-        console.log('hello')
-        state.user.tasks = action.payload;
-      }
-    },
-
     unsetUser() {
       return initialState;
     },
   },
 });
 
-export const { setUser, updateUserTask, unsetUser } = userSlice.actions;
+export const { setUser, unsetUser } = userSlice.actions;
 
 export default userSlice.reducer;

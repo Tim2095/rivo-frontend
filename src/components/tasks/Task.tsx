@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import classes from "./task.module.scss";
 import { useState } from "react";
 import taskServices from "../../services/task";
-import { updateUserTask } from "../../reduers/userReducer";
-import { useNavigate } from "react-router-dom";
+import { setUser } from "../../reduers/userReducer"; 
+
 
 type User = {
   id: string;
@@ -26,12 +26,8 @@ type Task = {
   completed: boolean;
 };
 
-interface TaskComplete {
-  onTaskComplete: (data: any) => void;
-  onTaskUpdate: (data: any) => void;
-}
 
-const Task = ({ onTaskComplete, onTaskUpdate }: TaskComplete) => {
+const Task = () => {
   const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [taskTitle, setTaskTitle] = useState<string>("");
@@ -49,8 +45,7 @@ const Task = ({ onTaskComplete, onTaskUpdate }: TaskComplete) => {
   const handleCompleteTask = async (taskId: string, userId: string) => {
     try {
       const response = await taskServices.updateCompleteTask(taskId, userId);
-      onTaskComplete(response.user);
-      dispatch(updateUserTask(response.user.tasks));
+      dispatch(setUser(response.user));
       localStorage.removeItem("user");
       localStorage.setItem("user", JSON.stringify(response.user));
       setIsEditing(false);
@@ -73,9 +68,9 @@ const Task = ({ onTaskComplete, onTaskUpdate }: TaskComplete) => {
         taskTitle,
         taskDescription
       );
-      onTaskUpdate(response.user);
       localStorage.removeItem("user");
       localStorage.setItem("user", JSON.stringify(response.user));
+      dispatch(setUser(response.user))
       setIsEditing(false);
     } catch (err) {
       console.log("Failed to update task", err);
