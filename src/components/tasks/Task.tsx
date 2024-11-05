@@ -27,12 +27,11 @@ type Task = {
 };
 
 interface TaskComplete {
-  onTaskComple: (data: any) => void;
+  onTaskComplete: (data: any) => void;
   onTaskUpdate: (data: any) => void;
 }
 
 const Task = ({ onTaskComplete, onTaskUpdate }: TaskComplete) => {
-  const navigate = useNavigate()
   const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [taskTitle, setTaskTitle] = useState<string>("");
