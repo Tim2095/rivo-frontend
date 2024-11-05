@@ -30,6 +30,7 @@ function App() {
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const user = useSelector((state: RootState) => state.users);
+  const userTasks = useSelector((state: RootState) => state.user?.tasks);
   useEffect(() => {
     console.log('App ran')
     const storedUser = localStorage.getItem("user");
@@ -53,7 +54,7 @@ function App() {
     }
 
     setIsLoading(false);
-  }, [dispatch]);
+  }, [dispatch, navigate, userTasks]);
 
   if (isLoading) {
     return <p>Loading...</p>;
