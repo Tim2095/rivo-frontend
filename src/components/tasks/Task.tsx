@@ -47,12 +47,17 @@ const Task = ({ onTaskComplete, onTaskUpdate }: TaskComplete) => {
   }
 
   const handleCompleteTask = async (taskId: string, userId: string) => {
-    const response = await taskServices.updateCompleteTask(taskId, userId);
-    onTaskComplete(response.user);
-    dispatch(updateUserTask(response.user.tasks))
-    localStorage.removeItem('user')
-    localStorage.setItem('user', JSON.stringify(response.user))
-    setIsEditing(false);
+    try {
+      const response = await taskServices.updateCompleteTask(taskId, userId);
+      onTaskComplete(response.user);
+      dispatch(updateUserTask(response.user.tasks));
+      localStorage.removeItem("user");
+      localStorage.setItem("user", JSON.stringify(response.user));
+      setIsEditing(false);
+    } catch (err) {
+      console.log("Failed to update task", err);
+      alert("Error while updating task");
+    }
   };
 
   const handleEditTask = async (
@@ -61,18 +66,21 @@ const Task = ({ onTaskComplete, onTaskUpdate }: TaskComplete) => {
     taskTitle: string,
     taskDescription: string
   ) => {
-    const response = await taskServices.editTask(
-      taskId,
-      userId,
-      taskTitle,
-      taskDescription
-    );
-    console.log(response.user);
-    onTaskUpdate(response.user);
-    localStorage.removeItem('user')
-    localStorage.setItem('user', JSON.stringify(response.user))
-    setIsEditing(false)
-    
+    try {
+      const response = await taskServices.editTask(
+        taskId,
+        userId,
+        taskTitle,
+        taskDescription
+      );
+      onTaskUpdate(response.user);
+      localStorage.removeItem("user");
+      localStorage.setItem("user", JSON.stringify(response.user));
+      setIsEditing(false);
+    } catch (err) {
+      console.log("Failed to update task", err);
+      alert("Error while updating task");
+    }
   };
 
   return (
