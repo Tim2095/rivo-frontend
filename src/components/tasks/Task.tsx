@@ -70,6 +70,10 @@ const Task = ({ onTaskComplete, onTaskUpdate }: TaskComplete) => {
     );
     console.log(response.user);
     onTaskUpdate(response.user);
+    localStorage.removeItem('user')
+    localStorage.setItem('user', JSON.stringify(response.user))
+    setIsEditing(false)
+    
   };
 
   return (
