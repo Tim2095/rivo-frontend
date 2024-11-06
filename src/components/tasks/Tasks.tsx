@@ -21,7 +21,7 @@ interface User {
 }
 
 interface RootState {
-  users: User[];
+  user: User;
 }
 
 const Tasks = () => {
@@ -29,7 +29,7 @@ const Tasks = () => {
   const navigate = useNavigate();
   const [tasks, setTasks] = useState<string>('all')
 
-  const filteredTasks = user.tasks.filter(task => {
+  const filteredTasks = user.tasks.filter((task: Task) => {
     if(tasks === 'all') {
       return task 
     } else {
