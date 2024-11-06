@@ -12,7 +12,7 @@ export type User = {
 const initialState: User | null = null;
 
 const userSlice = createSlice({
-  name: "users",
+  name: "user",
   initialState,
   reducers: {
     setUser(state, action: PayloadAction<User>) {

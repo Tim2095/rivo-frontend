@@ -12,7 +12,7 @@ interface User {
 }
 
 interface RootState {
-  users: User[];
+  user: User[];
 }
 
 const MainHeader = () => {
@@ -117,9 +117,9 @@ const ProfileHeader = () => {
 };
 
 const Header = () => {
-  const users = useSelector((state: RootState) => state.users);
+  const user = useSelector((state: RootState) => state.user);
 
-  return !users ? <MainHeader /> : <ProfileHeader />;
+  return !user ? <MainHeader /> : <ProfileHeader />;
 };
 
 export default Header;

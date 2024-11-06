@@ -3,8 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import classes from "./task.module.scss";
 import { useState } from "react";
 import taskServices from "../../services/task";
-import { setUser } from "../../reduers/userReducer"; 
+import { setUser } from "../../reduers/userReducer";
 
+type Task = {
+  id: string;
+  title: string;
+  description: string;
+  completed: boolean;
+};
 
 type User = {
   id: string;
@@ -16,16 +22,8 @@ type User = {
 };
 
 interface RootState {
-  users: User[] | null;
+  user: User[];
 }
-
-type Task = {
-  id: string;
-  title: string;
-  description: string;
-  completed: boolean;
-};
-
 
 const Task = () => {
   const dispatch = useDispatch();
@@ -33,10 +31,8 @@ const Task = () => {
   const [taskTitle, setTaskTitle] = useState<string>("");
   const [taskDescription, setTaskDescription] = useState<string>("");
   const { id } = useParams<{ id: string }>();
-  const user = useSelector((state: RootState) => state.users);
-  const task = useSelector((state: RootState) => {
-    return state.users.tasks.find((task: Task) => task.id === id);
-  });
+  const user = useSelector((state: RootState) => state.user);
+  const task = user?.tasks.find((task) => task.id === id);
 
   if (!task) {
     return <p>Task not found</p>;
@@ -70,7 +66,7 @@ const Task = () => {
       );
       localStorage.removeItem("user");
       localStorage.setItem("user", JSON.stringify(response.user));
-      dispatch(setUser(response.user))
+      dispatch(setUser(response.user));
       setIsEditing(false);
     } catch (err) {
       console.log("Failed to update task", err);

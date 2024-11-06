@@ -25,7 +25,7 @@ interface RootState {
 }
 
 const Tasks = () => {
-  const user = useSelector((state: RootState) => state.users);
+  const user = useSelector((state: RootState) => state.user);
   const navigate = useNavigate();
   const [tasks, setTasks] = useState<string>('all')
 
