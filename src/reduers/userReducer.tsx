@@ -19,8 +19,8 @@ const userSlice = createSlice({
       return action.payload
     },
 
-    unsetUser() {
-      return initialState;
+    unsetUser(state, action: PayloadAction) {
+      return action.payload;
     },
   },
 });

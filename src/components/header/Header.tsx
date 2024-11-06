@@ -67,7 +67,7 @@ const ProfileHeader = () => {
   const handleLogout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
-    dispatch(unsetUser());
+    dispatch(unsetUser(null));
   };
 
   return (
