@@ -21,7 +21,7 @@ interface User {
 }
 
 interface RootState {
-  users: User[] | null;
+  user: User | null;
 }
 
 function App() {
@@ -43,12 +43,14 @@ function App() {
     const token = localStorage.getItem("token");
     if (token) {
       const decodedToken = jwtDecode(token);
-      const expirationTime = decodedToken.exp * 1000;
+
+    
+      const expirationTime = decodedToken.exp! * 1000;
 
       if (Date.now() > expirationTime) {
         localStorage.removeItem("user");
         localStorage.removeItem("token");
-        dispatch(unsetUser());
+        dispatch(unsetUser(null));
         navigate("/");
       }
     }

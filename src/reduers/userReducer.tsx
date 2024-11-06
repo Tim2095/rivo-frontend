@@ -9,7 +9,11 @@ export type User = {
   tasks: [];
 };
 
-const initialState: User | null = null;
+type UserState = User | null;
+
+// Set the initial state to null
+const initialState: UserState = null;
+
 
 const userSlice = createSlice({
   name: "user",
@@ -19,7 +23,7 @@ const userSlice = createSlice({
       return action.payload
     },
 
-    unsetUser(state, action: PayloadAction) {
+    unsetUser(state, action: PayloadAction<null>) {
       return action.payload;
     },
   },
