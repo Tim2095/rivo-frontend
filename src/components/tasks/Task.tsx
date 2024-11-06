@@ -22,7 +22,7 @@ type User = {
 };
 
 interface RootState {
-  user: User[];
+  user: User;
 }
 
 const Task = () => {
