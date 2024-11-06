@@ -4,6 +4,7 @@ import classes from "./task.module.scss";
 import { useState } from "react";
 import taskServices from "../../services/task";
 import { setUser } from "../../reduers/userReducer";
+import { useEffect } from "react";
 
 type Task = {
   id: string;
@@ -27,12 +28,21 @@ interface RootState {
 
 const Task = () => {
   const dispatch = useDispatch();
-  const [isEditing, setIsEditing] = useState<boolean>(false);
-  const [taskTitle, setTaskTitle] = useState<string>("");
-  const [taskDescription, setTaskDescription] = useState<string>("");
   const { id } = useParams<{ id: string }>();
   const user = useSelector((state: RootState) => state.user);
+
   const task = user?.tasks.find((task) => task.id === id);
+
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [taskTitle, setTaskTitle] = useState<string>(task?.title || "");
+  const [taskDescription, setTaskDescription] = useState<string>(task?.description || "");
+
+  useEffect(() => {
+    if (task) {
+      setTaskTitle(task.title);
+      setTaskDescription(task.description);
+    }
+  }, [task]);
 
   if (!task) {
     return <p>Task not found</p>;
@@ -86,13 +96,13 @@ const Task = () => {
         <div className={classes["inp-cnt"]}>
           <input
             type="text"
-            defaultValue={task.title}
+            value={taskTitle}
             onChange={(e) => setTaskTitle(e.target.value)}
           />
           <textarea
             rows={5}
             cols={30}
-            defaultValue={task.description}
+            value={taskDescription}
             onChange={(e) => setTaskDescription(e.target.value)}
           />
         </div>
@@ -100,23 +110,21 @@ const Task = () => {
       <div className={classes["btn-cnt"]}>
         <button
           onClick={() => handleCompleteTask(task.id, user.id)}
-          disabled={task.completed ? true : false}
+          disabled={task.completed}
         >
           Complete
         </button>
-        <>
-          {!isEditing ? (
-            <button onClick={() => setIsEditing(true)}>Edit</button>
-          ) : (
-            <button
-              onClick={() =>
-                handleEditTask(task.id, user.id, taskTitle, taskDescription)
-              }
-            >
-              save
-            </button>
-          )}
-        </>
+        {!isEditing ? (
+          <button onClick={() => setIsEditing(true)}>Edit</button>
+        ) : (
+          <button
+            onClick={() =>
+              handleEditTask(task.id, user.id, taskTitle, taskDescription)
+            }
+          >
+            Save
+          </button>
+        )}
       </div>
     </div>
   );
