@@ -11,7 +11,6 @@ export type User = {
 
 type UserState = User | null;
 
-// Set the initial state to null
 const initialState: UserState = null;
 
 
@@ -24,7 +23,7 @@ const userSlice = createSlice({
     },
 
     unsetUser(state, action: PayloadAction<null>) {
-      return action.payload;
+      return action.payload
     },
   },
 });
