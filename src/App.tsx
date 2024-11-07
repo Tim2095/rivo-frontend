@@ -32,7 +32,7 @@ function App() {
   const user = useSelector((state: RootState) => state.user);
   // const userTasks = useSelector((state: RootState) => state.user?.tasks);
   useEffect(() => {
-    console.log('App ran')
+    console.log("App ran");
     const storedUser = localStorage.getItem("user");
 
     if (storedUser) {
@@ -44,7 +44,6 @@ function App() {
     if (token) {
       const decodedToken = jwtDecode(token);
 
-    
       const expirationTime = decodedToken.exp! * 1000;
 
       if (Date.now() > expirationTime) {
@@ -56,12 +55,11 @@ function App() {
     }
 
     setIsLoading(false);
-  }, [dispatch, navigate,]);
+  }, [dispatch, navigate]);
 
   if (isLoading) {
     return <p>Loading...</p>;
   }
-
 
   return (
     <div className="container">
@@ -74,18 +72,8 @@ function App() {
         <Route path="signup" element={<Signup />} />
         <Route path="login" element={<Login />} />
         {user && <Route path="tasks" element={<Tasks />} />}
-        {user && (
-          <Route
-            path="tasks/:id"
-            element={<Task />}
-          />
-        )}
-        {user && (
-          <Route
-            path="new-task"
-            element={<NewTask />}
-          />
-        )}
+        {user && <Route path="tasks/:id" element={<Task />} />}
+        {user && <Route path="new-task" element={<NewTask />} />}
       </Routes>
     </div>
   );

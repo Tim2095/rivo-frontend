@@ -25,6 +25,8 @@ const UserForm = () => {
         password: password.current!.value,
         tasks: [],
       };
+
+      console.log(newUser);
       await userServices.createUser(newUser);
       console.log("User created successfully");
       setSuccessUser("User created successfully");
