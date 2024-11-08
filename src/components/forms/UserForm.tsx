@@ -21,7 +21,7 @@ const UserForm = () => {
         firstname: firstname.current!.value,
         lastname: lastname.current!.value,
         age: +age.current!.value,
-        email: email.current!.value.toLowerCase(),
+        email: email.current!.value,
         password: password.current!.value,
         tasks: [],
       };
